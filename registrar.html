@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PSU - Registrar's Office | Academic Records</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;800&family=Roboto:wght@400;500;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+/* === VARIABLES (FOR CONSISTENCY) === */
+:root {
+    --dark-blue: #2e4395;
+    --gold: #FFC300;
+    --text-color: #333;
+    --red-link: #D32F2F; 
+}
+
+/* === GENERAL STYLES === */
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif; 
+    background-color: white;
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* === TOP DARK BLUE BAR === */
+.top-bar {
+    background-color: #243572; 
+    height: 5px; 
+    width: 100%;
+}
+
+/* ---------------------------------------------------------------------- */
+/* === NAVBAR STYLES === */
+/* ---------------------------------------------------------------------- */
+.navbar {
+    background-color: var(--dark-blue); 
+    padding: 15px 15px; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    color: white;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+/* School Name/Logo - Desktop/Default View */
+.school-name-area {
+    display: flex; 
+    align-items: center; 
+    flex-shrink: 0;
+    margin-right: 30px; 
+    position: static; 
+    left: auto;
+    transform: none;
+}
+.school-logo {
+    height: 65px; 
+    width: auto;
+    margin-right: 15px; 
+}
+.full-name {
+    display: inline-block !important;
+    line-height: 1.0; 
+    font-family: 'Roboto', sans-serif; 
+    font-weight: 800; 
+    font-size: 1.6em; 
+    color: white; 
+    text-transform: uppercase;
+    padding-top: 5px; 
+}
+.full-name .big-text {
+    display: block; 
+    line-height: 1.0;
+}
+.full-name .small-text {
+    display: block; 
+    font-size: 0.9em; 
+    font-weight: 800; 
+    opacity: 1; 
+    margin-left: 0; 
+    margin-top: 0; 
+    line-height: 1.0;
+}
+
+/* Desktop Links */
+.main-links-container {
+    display: flex;
+    align-items: center; 
+    flex-grow: 1; 
+    justify-content: flex-end; 
+    order: 2; 
+}
+.main-links {
+    display: flex;
+    align-items: center; 
+    padding-top: 0; 
+    overflow-x: hidden;
+    flex-grow: 0; 
+    justify-content: flex-end; 
+    margin-right: 20px; 
+}
+.main-links a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px; 
+    padding: 8px 0;
+    white-space: nowrap;
+    transition: color 0.3s;
+    font-size: 1.0em; 
+    font-weight: 500;
+}
+/* Highlight Registrar link in gold/yellow */
+.main-links a:hover,
+.main-links a[href*="registrar.html"] { 
+    color: var(--gold); 
+}
+.right-side-actions {
+    display: flex;
+    align-items: center; 
+    flex-shrink: 0;
+}
+
+/* --- SEARCH BAR STYLES (Show/Hide Toggle) --- */
+.search-area {
+    position: relative; 
+    margin-right: 10px; 
+}
+.search-btn {
+    background-color: #e6e6e6; 
+    color: #333; 
+    border: none;
+    padding: 8px 15px; 
+    cursor: pointer;
+    border-radius: 4px; 
+    font-weight: 500;
+    font-size: 0.95em; 
+    display: flex;
+    align-items: center;
+    box-shadow: none;
+    height: 40px; 
+}
+.search-box {
+    display: none; 
+    position: absolute;
+    top: 100%;
+    right: 0;
+    padding: 10px;
+    background: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 100;
+    margin-top: 5px;
+    border-radius: 4px;
+    min-width: 250px;
+}
+.search-box input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+.search-box.active {
+    display: block; 
+}
+.menu-toggle {
+    display: none; 
+}
+
+/* SIDE NAV STYLES */
+.sidenav {
+    height: 100%;
+    width: 0; 
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    background-color: var(--dark-blue); 
+    overflow-x: hidden;
+    transition: 0.4s; 
+    padding-top: 15px; 
+    box-shadow: 4px 0 10px rgba(0,0,0,0.5);
+}
+/* Sidenav Header (only visible on mobile) */
+.sidenav-header {
+    display: none; /* Default: Hidden on Desktop */
+    flex-direction: column;
+    align-items: center;
+    padding: 15px 20px 20px 20px;
+    border-bottom: 2px solid var(--gold);
+    margin-bottom: 10px;
+}
+/* === START: FIX for School Name Size in Sidenav (Adjusted to be slightly larger) === */
+.sidenav-header .school-logo {
+    height: 60px; /* Slightly larger logo (Increased from 50px) */
+    width: auto;
+    margin-right: 0;
+    margin-bottom: 5px;
+}
+.sidenav-header .full-name {
+    /* ADJUSTED FONT SIZE HERE */
+    font-size: 1.2em; /* Increased from 1.0em */
+    text-align: center;
+    line-height: 1.1; 
+    font-weight: 700;
+}
+.sidenav-header .full-name .big-text {
+    line-height: 1.1; 
+}
+/* === END: FIX for School Name Size in Sidenav (Adjusted to be slightly larger) === */
+
+.sidenav a {
+    padding: 15px 20px; 
+    text-decoration: none;
+    font-size: 1.2em; 
+    color: white;
+    display: block;
+    transition: 0.3s;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500; 
+    letter-spacing: 0.5px;
+}
+.sidenav a:hover,
+.sidenav a[href*="registrar.html"] { 
+    color: var(--gold); 
+    background-color: #1a2a6b; 
+    padding-left: 25px; 
+}
+.sidenav .closebtn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 40px;
+    color: white; 
+    background-color: var(--dark-blue); 
+    border-bottom: none;
+    padding: 0 10px;
+}
+.overlay {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.4);
+    z-index: 999;
+}
+
+
+/* === SECONDARY BAR (Yellow) - Registrar's Title Bar === */
+.secondary-bar {
+    background-color: var(--gold); 
+    color: var(--dark-blue); 
+    padding: 8px 15px; 
+    font-weight: 800;
+    font-size: 1.2em; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+}
+
+/* === RESPONSIVE STYLES (Mobile/Small Screens) === */
+@media (max-width: 768px) { 
+    .navbar {
+        padding: 10px 15px;
+        height: 50px; 
+        /* Align all navbar content to the right */
+        justify-content: flex-end; 
+    }
+    
+    /* 1. Hide School Name/Logo on the main navbar */
+    .school-name-area {
+        display: none; 
+    }
+    
+    /* 2. Container for Menu Toggle only */
+    .main-links-container {
+        width: 100%;
+        /* Key: Align Menu Toggle to the far right */
+        justify-content: flex-end; 
+        order: 1; 
+        margin: 0;
+        padding: 0;
+    }
+
+    .main-links {
+        display: none; 
+    }
+    
+    /* 3. HIDE SEARCH AREA */
+    .search-area {
+        display: none; 
+    }
+    
+    /* 4. Menu Toggle (Top-Right) */
+    .menu-toggle {
+        display: block; 
+        order: 1; 
+        font-size: 1.8em;
+        color: white; 
+        margin-left: 0; 
+    }
+    
+    /* Secondary Bar Adjustment for Mobile */
+    .secondary-bar {
+        padding: 6px 15px; 
+        font-size: 1.0em; 
+    }
+    
+    /* Sidenav Header (to show logo/name) */
+    .sidenav-header {
+        display: flex; /* Make visible */
+    }
+    
+    /* Content Adjustments (General) */
+    .page-container {
+        flex-direction: column;
+        padding: 10px;
+    }
+    .right-sidebar h2, .quick-link-item {
+        text-align: center;
+    }
+    .contact-info-block {
+        text-align: center; 
+    }
+    .card-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .team-card, .team-card-top {
+        width: 100%;
+        box-sizing: border-box;
+        margin: 10px 0;
+    }
+}
+/* Optional: Adjust for mid-size screens (e.g., 769px to 1000px) */
+@media (min-width: 769px) and (max-width: 1000px) {
+    /* Adjust font size to ensure name and links fit well on tablets */
+    .full-name {
+        font-size: 1.3em;
+    }
+    .full-name .big-text {
+        line-height: 1.0;
+    }
+    .full-name .small-text {
+        font-size: 0.8em;
+    }
+}
+
+/* ---------------------------------------------------------------------- */
+/* === END NAVBAR STYLES === */
+/* ---------------------------------------------------------------------- */
+
+/* === Content/Footer/Modal Styles (Original Registrar Styles) === */
+.registrar-header {
+    text-align: center;
+    padding: 30px 20px 0 20px;
+    max-width: 1400px; 
+    margin: 0 auto;
+}
+.registrar-header h1 {
+    color: var(--text-color); 
+    font-size: 32px;
+    font-weight: bold;
+    margin: 0;
+}
+.page-container {
+    display: flex;
+    max-width: 1400px; 
+    margin: 0 auto;
+    gap: 40px;
+    padding: 20px;
+}
+.main-content {
+    flex-grow: 1;
+    flex-basis: 75%; 
+}
+.right-sidebar {
+    flex-basis: 25%; 
+    padding-top: 20px;
+    min-width: 250px; 
+}
+.about-section-header, .announcements-header, .team-header {
+    color: black;
+    font-size: 24px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+.team-header {
+    text-align: center;
+    margin-top: 50px;
+}
+.card-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; 
+    margin-top: 20px;
+    padding-bottom: 10px;
+}
+.card-link {
+    flex: 1 1 0; 
+    min-width: 200px; 
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-decoration: none;
+    display: block;
+    overflow: hidden;
+    transition: transform 0.3s;
+    cursor: pointer;
+    margin-bottom: 5px;
+    padding: 0;
+    height: 180px; 
+}
+.announcement-item {
+    flex: 1 1 33%;
+}
+.card-link:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+.card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    background-color: #e0e0e0;
+}
+.card-date {
+    font-size: 0.8em;
+    color: #888;
+    margin: 15px 0 5px 0;
+    font-weight: 600;
+}
+.card-title {
+    font-size: 1em;
+    font-weight: bold;
+    color: var(--text-color);
+    margin: 0;
+    line-height: 1.3;
+}
+.right-sidebar h2 {
+    color: var(--red-link); 
+    font-size: 16px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    text-align: right;
+}
+/* Style for Quick Links to behave like cards */
+.quick-link-item {
+    margin-bottom: 25px; 
+    text-align: right;
+    text-decoration: none;
+    display: block;
+    transition: transform 0.3s; 
+    cursor: pointer; 
+}
+
+.quick-link-item:hover {
+    transform: translateY(-3px); 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15); 
+}
+
+.link-label {
+    font-weight: bold;
+    margin-top: 5px;
+    display: block;
+    color: var(--text-color); 
+    margin-bottom: 5px; 
+}
+.link-image-placeholder {
+    display: block;
+    width: 100%;
+    border: 1px solid #ddd; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05); 
+    overflow: hidden;
+    height: 200px;
+    border-radius: 5px; 
+}
+.doc-image-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    background-color: #eee;
+}
+.contact-info-block {
+    text-align: right;
+    margin-top: 40px;
+    border-top: 2px solid var(--dark-blue); 
+    padding-top: 15px;
+}
+.contact-info-block p {
+    margin: 0;
+}
+.contact-info-block .bold-title {
+    font-weight: bold;
+    color: var(--dark-blue);
+    margin-bottom: 5px;
+}
+.contact-info-block .red-link {
+    color: var(--dark-blue); 
+    text-decoration: none;
+}
+.team-card-container {
+    text-align: center;
+    margin-bottom: 40px;
+}
+.team-card {
+    display: inline-block;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    width: 250px;
+    margin: 10px;
+}
+.team-card-top {
+    width: 250px;
+    margin: 10px;
+    padding: 10px;
+}
+.team-card-bottom-row {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.team-card-img-large {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 5px;
+}
+.team-card-img-small {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 5px;
+}
+.team-card-name {
+    font-weight: bold;
+    margin: 0;
+}
+.team-card-role {
+    margin: 3px 0 0 0;
+    font-size: 0.9em;
+    color: #555;
+}
+.faq-question {
+    width: 100%;
+    text-align: left;
+    padding: 15px;
+    border: none;
+    background-color: var(--dark-blue); 
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 5px;
+    border-radius: 3px;
+    transition: background-color 0.3s, color 0.3s;
+    color: white; 
+    font-weight: bold;
+}
+.faq-question:hover {
+    background-color: #1a2a6b; 
+    color: var(--gold); 
+}
+.faq-question.active {
+    background-color: #1a2a6b; 
+    color: var(--gold); 
+}
+.faq-answer {
+    padding: 15px;
+    background-color: white;
+    border: 1px solid var(--dark-blue); 
+    border-top: none;
+    display: none;
+    margin-bottom: 10px;
+    color: var(--text-color);
+    border-radius: 0 0 3px 3px;
+}
+/* === FOOTER STYLES (Simple Style with Icons) === */
+footer {
+    text-align: center;
+    background-color: #808080; /* Gray background */
+    color: white;
+    margin-top: 40px;
+}
+.footer-main {
+    display: flex;
+    justify-content: space-around; 
+    max-width: 1400px; 
+    margin: 0 auto;
+    text-align: left;
+    padding: 30px 20px;
+    flex-wrap: wrap;
+}
+.footer-column {
+    margin-bottom: 20px;
+}
+.footer-column p {
+    margin: 5px 0;
+}
+.footer-column a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s; /* Transition for hover */
+}
+.footer-column a:hover {
+    color: var(--gold); /* Highlight on hover */
+}
+
+/* Social Media Icons */
+.social-media-icons {
+    display: flex; 
+    gap: 15px; 
+    margin-top: 10px;
+}
+.social-media-icons a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.5em; /* Icon size */
+    transition: color 0.3s, transform 0.3s;
+}
+.social-media-icons a:hover {
+    color: var(--gold); /* Gold hover effect */
+    transform: translateY(-2px); /* Slight lift */
+}
+
+/* Center text and icons on mobile */
+@media (max-width: 768px) { /* Uses the new breakpoint */
+    .footer-main {
+        gap: 40px;
+        padding: 20px;
+        text-align: center;
+        flex-direction: column;
+        max-width: 100%;
+    }
+    .footer-column {
+        text-align: center; 
+    }
+    .social-media-icons {
+        justify-content: center; /* Center icons on mobile */
+    }
+}
+
+
+.footer-copyright {
+    text-align: center;
+    font-size: 0.8em;
+    padding: 10px 0;
+    border-top: 1px solid #6c757d;
+}
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    padding-top: 60px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.9);
+}
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    max-height: 90vh;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+.close-modal { 
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    z-index: 2001;
+}
+@keyframes zoom {
+    from {transform:scale(0)}
+    to {transform:scale(1)}
+}
+
+    </style>
+</head>
+
+<body>
+<div class="top-bar"></div>
+
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    
+    <div class="sidenav-header">
+        <img src="image/ganda.png" alt="PSU Logo" class="school-logo">
+        <span class="full-name">
+            <span class="big-text">PHILLIPINE STATE</span> 
+            <span class="small-text">UNIVERSITY</span> 
+        </span>
+    </div>
+    
+    <a href="index.html">Home</a>
+    <a href="#">News</a>
+    <a href="admission.html">Admissions</a>
+    <a href="#">Scholarships</a>
+    <a href="#">Alumni</a>
+    <a href="jobs.html">Jobs</a>
+    <a href="#">Research</a>
+    <a href="registrar.html" style="color: var(--gold); background-color: #1a2a6b;">Registrar</a> 
+    <a href="#">Contact Us</a>
+    <a style="border-bottom: none; color: #999; font-size: 0.8em; margin-top: 10px; cursor: default; padding-left: 20px;">© 2024 PSU</a>
+</div>
+
+<div class="overlay" id="overlay" onclick="closeNav()"></div>
+
+<nav class="navbar">
+    
+    <span class="school-name-area">
+        <img src="image/ganda.png" alt="PSU Logo" class="school-logo">
+        
+        <span class="full-name">
+            <span class="big-text">PHILLIPINE STATE</span> 
+            <span class="small-text">UNIVERSITY</span> 
+        </span>
+    </span>
+
+    <div class="main-links-container">
+        <div class="main-links" id="mainMenu">
+            <a href="index.html">Home</a>
+            <a href="#">News</a>
+            <a href="admission.html">Admissions</a>
+            <a href="#">Scholarships</a>
+            <a href="#">Alumni</a>
+            <a href="jobs.html">Jobs</a>
+            <a href="">Research</a>
+            <a href="registrar.html">Registrar</a>
+            <a href="#">Contact Us</a>
+        </div>
+
+        <div class="right-side-actions">
+            <div class="search-area">
+                <button class="search-btn" onclick="toggleSearchBar()"> 
+                    <i class="fas fa-search"></i> <span>Search</span>
+                </button>
+                <div class="search-box" id="searchBox"> 
+                    <input type="text" placeholder="Search PSU website...">
+                </div>
+            </div>
+        </div>
+        
+        <div class="menu-toggle" id="menuToggle" onclick="openNav()">
+            <i class="fas fa-bars"></i>
+        </div>
+    </div>
+</nav>
+<div class="secondary-bar">
+    <span>REGISTRAR'S OFFICE | ACADEMIC RECORDS</span>
+</div>
+
+<div class="registrar-header">
+    <h1>REGISTRAR</h1>
+</div>
+
+<div class="page-container">
+
+    <div class="main-content">
+
+        <h2 class="about-section-header">About the Registrar's Office</h2>
+        <p>The Office of the Registrar at **PHILLIPINE STATE UNIVERSITY** is responsible for maintaining accurate academic records and supporting students' academic progress. It manages student enrollment, grades, transcripts, and certification requests, ensuring that all records comply with institutional standards.</p>
+        <p>The office also facilitates the registration process, oversees graduation requirements, and assists with credential verification. Committed to delivering excellent service, the Registrar's Office plays a vital role in student and faculty support by providing efficient administrative services and safeguarding academic integrity. Its focus is on ensuring a seamless academic experience for the entire PSU community.</p>
+
+        <h2 class="announcements-header">ANNOUNCEMENTS</h2>
+
+        <div class="card-container">
+
+            <div class="announcement-item">
+                <a class="card-link" onclick="openModal(this)" data-title="New Students Enrollment Process 2025-2026">
+                    <img src="https://csa.edu.ph/wp-content/uploads/2025/06/Enrollment-Requirements-AY2025-2026-Registrars-Office-1-600x406.png" alt="New Student Requirements" class="card-image">
+                </a>
+                <p class="card-date">JUNE 24, 2025</p>
+                <p class="card-title">New Students Enrollment Process 2025-2026</p>
+            </div>
+
+            <div class="announcement-item">
+                <a class="card-link" onclick="openModal(this)" data-title="Old Students Enrollment Process 2025-2025">
+                    <img src="https://csa.edu.ph/wp-content/uploads/2025/06/Enrollment-Process-OLD-AY2526-600x406.png" alt="Old Student Enrollment Process" class="card-image">
+                </a>
+                <p class="card-date">JUNE 23, 2025</p>
+                <p class="card-title">Old Students Enrollment Process 2025-2025</p>
+            </div>
+
+            <div class="announcement-item">
+                <a class="card-link" onclick="openModal(this)" data-title="CSA-ESC Application">
+                    <img src="https://csa.edu.ph/wp-content/uploads/2025/03/1-600x406.png" alt="Incoming Grade 7 Application" class="card-image">
+                </a>
+                <p class="card-date">MARCH 5, 2025</p>
+                <p class="card-title">CSA-ESC Application</p>
+            </div>
+        </div>
+
+        <h2 class="team-header">MEET THE TEAM</h2>
+
+        <div class="team-card-container">
+            <div class="team-card team-card-top" style="width: 250px;">
+                <img src="https://csa.edu.ph/wp-content/uploads/2025/03/Catherine-Sunguad.jpg" alt="Registrar Picture" class="team-card-img-large">
+                <p class="team-card-name">Ms. Maria Dela Cruz</p>
+                <p class="team-card-role">Registrar</p>
+            </div>
+
+            <div class="team-card-bottom-row">
+
+                <div class="team-card" style="width: 250px;">
+                    <img src="image/maria.jpg" alt="Liaise Picture" class="team-card-img-small">
+                    <p class="team-card-name">Ms. Jane Doe</p>
+                    <p class="team-card-role">Registrar Liaise</p>
+                </div>
+
+                <div class="team-card" style="width: 250px;">
+                    <img src="https://csa.edu.ph/wp-content/uploads/2025/03/2019-ANDRES-MAITA.png" alt="Evaluator Picture" class="team-card-img-small">
+                    <p class="team-card-name">Mr. Peter Reyes</p>
+                    <p class="team-card-role">Records Evaluator</p>
+                </div>
+
+                <div class="team-card" style="width: 250px;">
+                    <img src="https://csa.edu.ph/wp-content/uploads/2025/03/Daguno-Gleiza.jpg" alt="Foreign Services Picture" class="team-card-img-small">
+                    <p class="team-card-name">Ms. Sofia Lim</p>
+                    <p class="team-card-role">Foreign Services Unit In-charge</p>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="announcements-header">Frequently Asked Questions</h2>
+
+        <div class="faq-section">
+            <button class="faq-question" onclick="toggleAnswer(this)">Who can request a Certificate of Enrollment for a student?</button>
+            <div class="faq-answer">
+                Usually, only the student, their parent, or a legal guardian can request a Certificate of Enrollment. An authorization letter is required if requested by someone else.
+            </div>
+
+            <button class="faq-question" onclick="toggleAnswer(this)">Can my school records be sent online?</button>
+            <div class="faq-answer">
+                Yes, PSU can send official school records electronically to other educational institutions or agencies upon formal request and verification of the receiving entity.
+            </div>
+
+            <button class="faq-question" onclick="toggleAnswer(this)">Where can I find my Learner Reference Number (LRN)?</button>
+            <div class="faq-answer">
+                Your LRN is typically printed on your latest Report Card (Form 138) or any official academic document issued by the school. You may also coordinate with the Records Evaluator for assistance.
+            </div>
+
+            <button class="faq-question" onclick="toggleAnswer(this)">I lost my diploma/report card. Can I request for a new copy?</button>
+            <div class="faq-answer">
+                Yes, you may request for a certified true copy or a replacement, but this usually requires submitting an affidavit of loss and payment of a processing fee. Contact the office for the exact procedure.
+            </div>
+
+        </div>
+    </div>
+    <div class="right-sidebar">
+
+        <h2 style="color: var(--dark-blue); text-align: right; margin-top: 0;">Quick links:</h2>
+
+        <a href="#" class="quick-link-item" onclick="openModal(this)" data-title="End of School Year Rites (2024-2025)">
+            <span class="link-label">End of School Year Rites (2024-2025)</span>
+            <div class="link-image-placeholder">
+                <img src="https://csa.edu.ph/wp-content/uploads/2025/03/End-of-School-Year-Rites_.png" alt="End of Year Rites" class="doc-image-preview card-image">
+            </div>
+        </a>
+        <a href="#" class="quick-link-item" onclick="openModal(this)" data-title="PSU-Grant-2025 Application Form">
+            <span class="link-label">PSU-Grant-2025 Application Form</span>
+            <div class="link-image-placeholder">
+                <img src="https://csa.edu.ph/wp-content/uploads/2025/03/ESC-Grant-2025_.png" alt="Grant Application Form" class="doc-image-preview card-image">
+            </div>
+        </a>
+        <div class="contact-info-block">
+            <p class="bold-title">Business Hours:</p>
+            <p>Mondays-Fridays 7:30AM</p>
+            <p style="margin-bottom: 10px;">— 3:30 PM</p>
+
+            <p>email: <a href="mailto:registrar@psu.edu.ph" class="red-link">registrar@psu.edu.ph</a></p>
+            <p>Tel number: 899-10-100,</p>
+            <p>899-10-110</p>
+        </div>
+
+    </div>
+    </div>
+
+<footer>
+    <div class="footer-main">
+        <div class="footer-column">
+            <p style="font-weight: bold; margin: 0; font-size: 1.1em;">PHILLIPINE STATE UNIVERSITY</p>
+            <p style="font-size: 0.9em;">Palm Ave, Dasmarinas Makati, Metro Manila</p>
+            <p style="margin-top: 20px; font-style: italic; font-size: 0.9em;">"Animus et cor unum in Deum"</p>
+        </div>
+
+        <div class="footer-column">
+            <p style="font-weight: bold; margin-top: 0;">For Inquiries:</p>
+            <p>899-10-100</p>
+
+            <p style="font-weight: bold; margin-top: 15px;">Admissions:</p>
+            <p>899-10-123</p>
+            <p>899-10-124</p>
+        </div>
+
+        <div class="footer-column">
+            <p style="font-weight: bold; margin-top: 0;">Registrar:</p>
+            <p>899-10-100</p>
+            <p>899-10-110</p>
+
+            <p style="font-weight: bold; margin-top: 15px;">WEBSITE</p>
+            <p><a href="#">Privacy Policy</a></p>
+            <p><a href="#">Site Map</a></p>
+        </div>
+
+        <div class="footer-column">
+            <p style="font-weight: bold; margin-top: 0;">SOCIAL MEDIA</p>
+            
+            <div class="social-media-icons">
+                <a href="#" aria-label="Link to Facebook" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Link to Twitter/X" title="Twitter/X"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Link to Instagram" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Link to Youtube" title="Youtube"><i class="fab fa-youtube"></i></a>
+            </div>
+            </div>
+    </div>
+    <div class="footer-copyright">
+        &copy; 2025 PHILLIPINE STATE UNIVERSITY – ICT & Media Department
+    </div>
+</footer>
+
+<div id="imageModal" class="modal" onclick="closeModal(event)">
+    <span class="close-modal" onclick="closeModal(event)">&times;</span>
+    <img class="modal-content" id="img01">
+    <div id="caption"></div>
+</div>
+
+<script>
+    // JAVASCRIPT FOR SIDE NAVIGATION BAR (SIDENAV)
+    function openNav() {
+        const sidenav = document.getElementById("mySidenav");
+        const overlay = document.getElementById("overlay");
+        const searchBox = document.getElementById('searchBox'); 
+        
+        // Ensure search bar is closed when opening side nav
+        if (searchBox && searchBox.classList.contains('active')) {
+             searchBox.classList.remove('active');
+        }
+
+        // Use 85% width on very small screens, 70% otherwise
+        sidenav.style.width = window.innerWidth <= 600 ? "85%" : "70%"; 
+        sidenav.classList.add('active'); 
+        overlay.style.display = "block"; 
+    }
+
+    function closeNav() {
+        const sidenav = document.getElementById("mySidenav");
+        const overlay = document.getElementById("overlay");
+        
+        sidenav.style.width = "0";
+        sidenav.classList.remove('active'); 
+        overlay.style.display = "none";
+    }
+
+    // JAVASCRIPT FOR SEARCH BAR TOGGLE 
+    function toggleSearchBar() {
+        const searchBox = document.getElementById('searchBox');
+        
+        // Toggle the 'active' class to show/hide the search box
+        searchBox.classList.toggle('active');
+        
+        // Focus the input field when the box appears
+        if (searchBox.classList.contains('active')) {
+            searchBox.querySelector('input').focus();
+            
+            // Ensure sidenav is closed if search bar opens
+            closeNav(); 
+        }
+    }
+
+    // Close search box if click outside 
+    document.addEventListener('click', function(event) {
+        const searchBox = document.getElementById('searchBox');
+        const searchBtn = document.querySelector('.search-btn');
+        const menuToggle = document.getElementById('menuToggle');
+
+        // Check if the click is NOT on the button, inside the search box, or on the menu toggle
+        if (searchBox && searchBtn && menuToggle && !searchBox.contains(event.target) && !searchBtn.contains(event.target) && !menuToggle.contains(event.target) && searchBox.classList.contains('active')) {
+            searchBox.classList.remove('active');
+        }
+    });
+
+    // JAVASCRIPT FOR FAQ ACCORDION
+    function toggleAnswer(button) {
+        const answer = button.nextElementSibling;
+        const isActive = button.classList.contains('active');
+
+        // Close all other answers
+        document.querySelectorAll('.faq-answer').forEach(ans => {
+            ans.style.display = "none";
+            ans.previousElementSibling.classList.remove('active');
+        });
+
+        // Open/Toggle the clicked one
+        if (!isActive) {
+            answer.style.display = "block";
+            button.classList.add('active');
+        } else {
+            answer.style.display = "none";
+            button.classList.remove('active');
+        }
+    }
+
+    // JAVASCRIPT FOR IMAGE MODAL/ZOOM
+    function openModal(cardLinkElement) {
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('img01');
+        const captionText = document.getElementById('caption');
+        
+        const imgElement = cardLinkElement.querySelector('.card-image'); 
+
+        let titleText = cardLinkElement.getAttribute('data-title');
+
+        if (imgElement) {
+            modal.style.display = "block";
+            modalImg.src = imgElement.src;
+            captionText.innerHTML = titleText || 'Announcement Image';
+        }
+    }
+
+    function closeModal(event) {
+        if (event.target.id === 'imageModal' || event.target.classList.contains('close-modal')) {
+            const modal = document.getElementById('imageModal');
+            modal.style.display = "none";
+        }
+    }
+</script>
+</body>
+</html>

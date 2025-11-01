@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PSU - Home with Updated Footer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* === VARIABLES === */
+        :root {
+            --dark-blue: #2e4395;
+            --gold: #FFC300;
+            --gold-darker: #e6b000;
+            --text-color: #333;
+            --top-bar-color: #004d40; /* Dark Green */
+            --light-gray: #f9f9f9;
+            --footer-bg: #808080; /* Gray background for new footer */
+        }
+        /* === GENERAL STYLES === */
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: white;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        /* === TOP DARK GREEN BAR === */
+        .top-bar {
+            background-color: var(--top-bar-color); 
+            height: 5px; 
+            width: 100%;
+        }
+        /* ---------------------------------------------------------------------- */
+        /* === NAVBAR STYLES (Mobile Optimized) === */
+        /* ---------------------------------------------------------------------- */
+        .navbar {
+            background-color: var(--dark-blue); 
+            padding: 15px 15px; 
+            display: flex;
+            justify-content: space-between;
+            align-items: center; 
+            color: white;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            height: 65px; 
+        }
+        /* School Name/Logo - Default (Desktop) */
+        .school-name-area {
+            display: flex; 
+            align-items: center; 
+            flex-shrink: 0;
+            margin-right: 30px; 
+            order: 1; /* Default Desktop Order */
+            text-decoration: none; /* Treat as a link container */
+            color: white; /* Text color */
+        }
+        .school-logo {
+            height: 65px; 
+            width: auto;
+            margin-right: 15px; 
+        }
+        .full-name {
+            display: inline-block !important;
+            line-height: 1.0; 
+            font-weight: 800; 
+            font-size: 1.6em; 
+            color: white; 
+            text-transform: uppercase;
+            padding-top: 5px; 
+            text-align: left;
+        }
+        .full-name .big-text {
+            display: block; 
+            line-height: 1.0;
+        }
+        .full-name .small-text {
+            display: block; 
+            font-size: 0.9em; 
+            font-weight: 800; 
+            line-height: 1.0;
+        }
+        /* Desktop Links */
+        .main-links-container {
+            display: flex;
+            align-items: center; 
+            flex-grow: 1; 
+            justify-content: flex-end; 
+            order: 2; 
+        }
+        .main-links {
+            display: flex;
+            align-items: center; 
+            padding-top: 0; 
+            overflow-x: hidden;
+            flex-grow: 0; 
+            justify-content: flex-end; 
+            margin-right: 20px; 
+        }
+        .main-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px; 
+            padding: 8px 0;
+            white-space: nowrap;
+            transition: color 0.3s;
+            font-size: 1.0em; 
+            font-weight: 500;
+        }
+        .main-links a:hover,
+        .main-links a[href*="home.html"] { 
+            color: var(--gold); 
+        }
+        .right-side-actions {
+            display: flex;
+            align-items: center; 
+            flex-shrink: 0;
+            order: 3; /* Default Desktop Order */
+        }
+        /* Search Button/Area Styles */
+        .search-area {
+            position: relative; 
+            margin-right: 10px; 
+        }
+        .search-btn {
+            background-color: #e6e6e6; 
+            color: #333; 
+            border: none;
+            padding: 8px 15px; 
+            cursor: pointer;
+            border-radius: 4px; 
+            font-weight: 500;
+            font-size: 0.95em; 
+            display: flex;
+            align-items: center;
+            height: 40px; 
+        }
+        .search-btn i {
+            font-size: 1.0em;
+            margin-right: 5px; 
+            color: var(--dark-blue); 
+        }
+        .search-btn span {
+            display: inline; 
+        }
+        .search-box {
+            display: none; 
+            position: absolute;
+            top: 100%;
+            right: 0;
+            padding: 10px;
+            background: white;
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            z-index: 100;
+            margin-top: 5px;
+            border-radius: 4px;
+            min-width: 250px;
+        }
+        .search-box.active {
+            display: block; 
+        }
+        .menu-toggle {
+            display: none; /* Hide on Desktop */
+            order: 1; 
+            font-size: 1.8em;
+            color: white; 
+            cursor: pointer;
+        }
+        /* SIDE NAVIGATION (Mobile Menu) STYLES */
+        .sidenav {
+            height: 100%;
+            width: 0; 
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            background-color: var(--dark-blue); 
+            overflow-x: hidden;
+            transition: 0.4s; 
+            padding-top: 15px; 
+            box-shadow: 4px 0 10px rgba(0,0,0,0.5);
+        }
+        .sidenav-header {
+            display: none; 
+            flex-direction: column;
+            align-items: center;
+            padding: 15px 20px 20px 20px;
+            border-bottom: 2px solid var(--gold);
+            margin-bottom: 10px;
+        }
+        .sidenav-header .school-logo {
+            height: 50px;
+            margin-right: 0;
+            margin-bottom: 5px;
+        }
+        .sidenav-header .full-name {
+            font-size: 1.2em;
+            text-align: center;
+            line-height: 1.1;
+            font-weight: 700;
+        }
+        .sidenav a {
+            padding: 15px 20px; 
+            text-decoration: none;
+            font-size: 1.2em; 
+            color: white;
+            display: block;
+            transition: 0.3s;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
+            font-weight: 500; 
+        }
+        .sidenav a:hover,
+        .sidenav a[href*="home.html"] { 
+            color: var(--gold); 
+            background-color: #1a2a6b; 
+            padding-left: 25px; 
+        }
+        .sidenav .closebtn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            font-size: 40px;
+            color: white; 
+            background-color: var(--dark-blue); 
+            border-bottom: none;
+            padding: 0 10px;
+        }
+        /* === SECONDARY BAR (Gold) === */
+        .secondary-bar {
+            background-color: var(--gold); 
+            color: var(--dark-blue); 
+            padding: 8px 15px; 
+            font-weight: 800;
+            font-size: 1.2em; 
+        }
+        /* === STATIC IMAGE HEADER STYLES === */
+        .static-image-header {
+            width: 100%;
+            padding-top: 40%; 
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        .static-image-header img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+        /* === CONTENT STYLES (Kept as is) === */
+        .main-content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 15px;
+        }
+        .section-heading {
+            text-align: center;
+            color: var(--dark-blue);
+            font-size: 2.2em;
+            font-weight: 700;
+            margin-bottom: 40px;
+            padding-bottom: 10px;
+            position: relative;
+        }
+        .section-heading::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--gold);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+        .mission-vision-block {
+            background-color: var(--dark-blue); 
+            color: white;
+            padding: 50px;
+            margin: 30px 0;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+        }
+        .mission-vision-block h2 {
+            color: var(--gold);
+            font-size: 1.8em;
+            margin-top: 0;
+            text-transform: uppercase;
+        }
+        .mission-vision-block p {
+            max-width: 900px;
+            margin: 20px auto 30px;
+            font-size: 1.1em;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+        .mission-vision-block a {
+            display: inline-block;
+            background-color: var(--gold);
+            color: var(--dark-blue);
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 700;
+            transition: background-color 0.3s;
+        }
+        .mission-vision-block a:hover {
+            background-color: white;
+        }
+        .stats-section {
+            padding: 40px 0;
+            background-color: var(--light-gray);
+            border-top: 1px solid #eee;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            text-align: center;
+        }
+        .stat-card {
+            padding: 20px 10px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .stat-card .number {
+            color: var(--gold);
+            font-size: 3.0em;
+            font-weight: 900;
+            line-height: 1.0;
+            margin-bottom: 5px;
+        }
+        .stat-card .label {
+            color: var(--dark-blue);
+            font-size: 1.0em;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+        .quick-links-section {
+            background-color: white; 
+            padding: 40px 15px;
+            border-top: 1px solid #eee;
+        }
+        .quick-links {
+            display: flex;
+            justify-content: center; 
+            flex-wrap: wrap;
+            gap: 20px;
+            text-align: center;
+        }
+        .quick-links a {
+            flex-basis: calc(33% - 40px); 
+            background-color: var(--gold); 
+            color: var(--dark-blue); 
+            padding: 25px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: 700;
+            transition: background-color 0.3s, transform 0.2s;
+            min-width: 250px;
+        }
+        .quick-links a:hover {
+            background-color: var(--gold-darker);
+            transform: translateY(-5px);
+            color: var(--dark-blue);
+        }
+        .quick-links i {
+            display: block;
+            font-size: 2.0em;
+            margin-bottom: 10px;
+        }
+        
+        /* ---------------------------------------------------------------------- */
+        /* === FOOTER STYLES === */
+        /* ---------------------------------------------------------------------- */
+        footer {
+            text-align: center;
+            background-color: var(--footer-bg); /* Gray background */
+            color: white;
+            margin-top: 40px;
+        }
+        .footer-main {
+            display: flex;
+            justify-content: space-around; 
+            max-width: 1400px; 
+            margin: 0 auto;
+            text-align: left;
+            padding: 30px 20px;
+            flex-wrap: wrap;
+        }
+        .footer-column {
+            margin-bottom: 20px;
+        }
+        .footer-column p {
+            margin: 5px 0;
+        }
+        .footer-column a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s; 
+        }
+        .footer-column a:hover {
+            color: var(--gold); 
+        }
+        .social-media-icons {
+            display: flex; 
+            gap: 15px; 
+            margin-top: 10px;
+        }
+        .social-media-icons a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5em; 
+            transition: color 0.3s, transform 0.3s;
+        }
+        .social-media-icons a:hover {
+            color: var(--gold); 
+            transform: translateY(-2px); 
+        }
+        .footer-copyright {
+            text-align: center;
+            font-size: 0.8em;
+            padding: 10px 0;
+            border-top: 1px solid #6c757d;
+        }
+        
+        /* ---------------------------------------------------------------------- */
+        /* === RESPONSIVE STYLES (UPDATED NAVBAR FOR MOBILE) === */
+        /* ---------------------------------------------------------------------- */
+        @media (max-width: 1000px) { 
+            .navbar {
+                padding: 10px 15px;
+                height: 70px; 
+                /* Align content to the end (right) */
+                justify-content: flex-end; 
+            }
+            
+            /* 1. HIDE School Name/Logo (BAWAL PA RIN MAKITA) */
+            .school-name-area {
+                display: none !important; 
+            }
+            
+            /* 2. Hide desktop links */
+            .main-links-container {
+                display: none;
+            }
+            
+            /* 3. HIDE Search on mobile */
+            .right-side-actions {
+                display: none; 
+            }
+
+            /* 4. MENU TOGGLE sa KANAN */
+            .menu-toggle {
+                display: block; 
+                order: 1; /* Make it the first/only visible item */
+                font-size: 1.8em; 
+                /* Ito ang nagtutulak sa toggle sa KANAN (right edge) */
+                margin-left: auto; 
+                margin-right: 0; 
+            }
+
+            .secondary-bar {
+                padding: 8px 15px; 
+                font-size: 1.1em;
+            }
+            
+            .static-image-header {
+                padding-top: 56.25%; 
+            }
+            .sidenav-header {
+                display: flex; 
+            }
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .quick-links a {
+                flex-basis: calc(50% - 20px); 
+            }
+            
+            /* Footer: Mobile Adjustments */
+            .footer-main {
+                gap: 40px;
+                padding: 20px;
+                text-align: center;
+                flex-direction: column;
+                max-width: 100%;
+            }
+            .footer-column {
+                text-align: center; 
+            }
+            .social-media-icons {
+                justify-content: center;
+            }
+        }
+        @media (max-width: 600px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .quick-links a {
+                flex-basis: 100%; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar"></div>
+
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        
+        <div class="sidenav-header">
+            <img src="image/ganda.png" alt="PSU Logo" class="school-logo"> 
+            <span class="full-name">
+                <span class="big-text">PHILLIPINE STATE</span> 
+                <span class="small-text">UNIVERSITY</span> 
+            </span>
+        </div>
+        
+        <a href="index.html">Home</a>
+        <a href="#">News</a>
+        <a href="admission.html">Admissions</a>
+        <a href="#">Scholarships</a>
+        <a href="#">Alumni</a>
+        <a href="jobs.html">Jobs</a>
+        <a href="#">Research</a>
+        <a href="registrar.html">Registrar</a>
+        <a href="#">Contact Us</a>
+    </div>
+
+    <nav class="navbar">
+        <a href="index.html" class="school-name-area">
+            <img src="image/ganda.png" alt="PSU Logo" class="school-logo"> 
+            <span class="full-name">
+                <span class="big-text">PHILLIPINE STATE</span> 
+                <span class="small-text">UNIVERSITY</span> 
+            </span>
+        </a>
+
+        <div class="main-links-container">
+            <div class="main-links">
+                <a href="index.html">Home</a>
+                <a href="#">News</a>
+                <a href="admission.html">Admissions</a>
+                <a href="#">Scholarships</a>
+                <a href="#">Alumni</a>
+                <a href="jobs.html">Jobs</a>
+                <a href="#">Research</a>
+                <a href="registrar.html">Registrar</a>
+                <a href="#">Contact Us</a>
+            </div>
+        </div>
+
+        <div class="right-side-actions"> 
+            <div class="search-area">
+                <button class="search-btn" onclick="toggleSearchBar()">
+                    <i class="fas fa-search"></i> <span>Search</span>
+                </button>
+                <div class="search-box" id="searchBox">
+                    <input type="text" placeholder="Search PSU website...">
+                </div>
+            </div>
+        </div>
+        
+        <div class="menu-toggle" id="menuToggle" onclick="openNav()">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <div class="secondary-bar">
+        <span>PSU - Home | Future-Ready Filipinos</span>
+    </div>
+
+    <div class="static-image-header" role="img" aria-label="Philippine State University - Stadium and Crowd">
+        <img src="image/schooling.jpg" 
+            alt="Crowd in a stadium waving blue and gold flags with the letters S and U">
+    </div>
+
+    <div class="main-content-container">
+        <div class="mission-vision-block">
+            <h2>OUR MISSION</h2>
+            <p>
+                To provide excellent and relevant education, conduct innovative research, and deliver impactful extension services, fostering globally competitive, morally upright, and patriotic citizens who contribute to national development.
+            </p>
+            <a href="#">Learn About Our Values <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </div>
+    
+    <div class="stats-section">
+        <div class="main-content-container">
+            <h2 class="section-heading">PSU By The Numbers</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="number">15K+</div>
+                    <div class="label">Total Students</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">50+</div>
+                    <div class="label">Degree Programs</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">92%</div>
+                    <div class="label">Licensure Pass Rate</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">8</div>
+                    <div class="label">Research Centers</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="main-content-container">
+        <h2 class="section-heading">Vibrant Campus Life</h2>
+        <div class="campus-life-feature" style="display: flex; align-items: center; gap: 30px; margin: 60px 0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+            <div class="campus-life-feature-image" style="flex: 1; min-height: 350px; background: url('https://via.placeholder.com/600x400/004d40/FFFFFF?text=PSU+Student+Center') center/cover no-repeat;">
+            </div>
+            <div class="campus-life-feature-content" style="flex: 1; padding: 30px;">
+                <h3 style="color: var(--dark-blue); font-size: 2.0em; margin-top: 0;">More Than Just Academics</h3>
+                <p>
+                    Experience a thriving community outside the classroom. From student organizations and cultural festivals to volunteer work and sports, PSU offers countless opportunities to grow, lead, and connect with fellow students.
+                </p>
+                <p>
+                    Discover the activities that shape your university journey and build lifelong friendships.
+                </p>
+                <a href="#" style="display: inline-block; color: var(--gold); text-decoration: none; font-weight: 700; margin-top: 20px; padding: 8px 0; border-bottom: 2px solid var(--gold); transition: color 0.3s;">Explore Campus Organizations <i class="fas fa-external-link-alt"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="quick-links-section">
+        <div class="main-content-container">
+            <h2 class="section-heading" style="margin-bottom: 20px;">Ready to Start Your Journey?</h2>
+            <div class="quick-links">
+                <a href="admission.html">
+                    <i class="fas fa-user-plus"></i> Apply Now
+                </a>
+                <a href="#">
+                    <i class="fas fa-book-open"></i> View Tuition & Fees
+                </a>
+                <a href="registrar.html">
+                    <i class="fas fa-map-marked-alt"></i> Campus Directions
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-main">
+            <div class="footer-column">
+                <p style="font-weight: bold; margin: 0; font-size: 1.1em;">PHILLIPINE STATE UNIVERSITY</p>
+                <p style="font-size: 0.9em;">Palm Ave, Dasmarinas Makati, Metro Manila</p>
+                <p style="margin-top: 20px; font-style: italic; font-size: 0.9em;">"Animus et cor unum in Deum"</p>
+            </div>
+
+            <div class="footer-column">
+                <p style="font-weight: bold; margin-top: 0;">For Inquiries:</p>
+                <p>899-10-100</p>
+
+                <p style="font-weight: bold; margin-top: 15px;">Admissions:</p>
+                <p>899-10-123</p>
+                <p>899-10-124</p>
+            </div>
+
+            <div class="footer-column">
+                <p style="font-weight: bold; margin-top: 0;">Registrar:</p>
+                <p>899-10-100</p>
+                <p>899-10-110</p>
+
+                <p style="font-weight: bold; margin-top: 15px;">WEBSITE</p>
+                <p><a href="#">Privacy Policy</a></p>
+                <p><a href="#">Site Map</a></p>
+            </div>
+
+            <div class="footer-column">
+                <p style="font-weight: bold; margin-top: 0;">SOCIAL MEDIA</p>
+                
+                <div class="social-media-icons">
+                    <a href="#" aria-label="Link to Facebook" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Link to Twitter/X" title="Twitter/X"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Link to Instagram" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Link to Youtube" title="Youtube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            &copy; 2025 PHILLIPINE STATE UNIVERSITY – ICT & Media Department
+        </div>
+    </footer>
+
+    <script>
+        // JAVASCRIPT (Sidenav and Search functionality)
+        const mySidenav = document.getElementById('mySidenav'); 
+        const searchBox = document.getElementById('searchBox'); 
+
+        // Function to open the Sidenav
+        function openNav() {
+            // Set a fixed width (e.g., 85% on small screens, 280px on bigger screens)
+            mySidenav.style.width = window.innerWidth <= 600 ? "85%" : "280px"; 
+            if (searchBox) searchBox.classList.remove('active'); // Close search box if open
+        }
+
+        // Function to close the Sidenav
+        function closeNav() {
+            mySidenav.style.width = "0";
+        }
+        
+        // Toggle search bar functionality
+        function toggleSearchBar() {
+            // NOTE: The search button is hidden on mobile, so this only runs on desktop/larger screens
+            if (searchBox) {
+                searchBox.classList.toggle('active');
+                if (searchBox.classList.contains('active')) {
+                    closeNav(); // Close Sidenav if open
+                    searchBox.querySelector('input').focus();
+                }
+            }
+        }
+        
+        // Close search box when clicking outside of it
+        document.addEventListener('click', function(event) {
+            const searchBtn = document.querySelector('.search-btn');
+            // Check if the click is outside the search box AND the search button
+            if (searchBox && searchBtn && !searchBox.contains(event.target) && !searchBtn.contains(event.target) && searchBox.classList.contains('active')) {
+                searchBox.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

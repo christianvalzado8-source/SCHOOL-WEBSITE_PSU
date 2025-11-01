@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PSU Careers - Job Opportunities</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;800&family=Roboto:wght@400;500;700;800&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* === VARIABLES & BASE STYLES === */
+:root {
+    --dark-blue: #2e4395;
+    --gold: #FFC300;
+    --gold-darker: #e6b000;
+    --light-bg: #f9f9f9;
+    --text-color: #333;
+}
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif; /* Poppins for Careers page content */
+    background-color: var(--light-bg);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+/* === TOP DARK BLUE BAR (New from Registrar) === */
+.top-bar {
+    background-color: #243572; /* Darker Blue */
+    height: 5px;
+    width: 100%;
+}
+
+/* ---------------------------------------------------------------------- */
+/* === NAVBAR STYLES (UPDATED FROM REGISTRAR) === */
+/* ---------------------------------------------------------------------- */
+.navbar {
+    background-color: var(--dark-blue);
+    padding: 15px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+/* School Name/Logo - Desktop/Default View (New from Registrar) */
+.school-name-area {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    margin-right: 30px;
+    line-height: 1.0;
+}
+.school-logo {
+    height: 65px; /* Adjust size to fit navbar */
+    width: auto;
+    margin-right: 15px;
+}
+.full-name {
+    display: block; /* Important to keep the name visible */
+    font-family: 'Roboto', sans-serif; /* Use Roboto for consistency */
+    font-weight: 800;
+    font-size: 1.6em;
+    color: white;
+    text-transform: uppercase;
+    line-height: 1.0;
+    padding-top: 5px;
+}
+.full-name .big-text {
+    display: block;
+    line-height: 1.0;
+}
+.full-name .small-text {
+    display: block;
+    font-size: 0.9em;
+    font-weight: 800;
+    line-height: 1.0;
+}
+/* The old 'mobile-name' is now hidden/removed in favor of the Sidenav-Header */
+.mobile-name {
+    display: none !important;
+}
+
+/* Desktop Links */
+.main-links-container {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    justify-content: flex-end;
+}
+.main-links {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    overflow-x: hidden;
+}
+.main-links a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    padding: 8px 0;
+    white-space: nowrap;
+    transition: color 0.3s;
+    font-size: 1.0em; /* Reduced size for more links */
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
+}
+.main-links a:hover,
+/* Highlight Careers link in Desktop Navbar */
+.main-links a[href*="Careers"] {
+    color: var(--gold);
+}
+.right-side-actions {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+/* SEARCH BUTTON (Now uses Registrar style) */
+.search-area {
+    position: relative;
+    margin-right: 10px;
+}
+.search-btn {
+    background-color: #e6e6e6; /* White-ish button */
+    color: #333;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    font-weight: 500;
+    font-size: 0.95em;
+    display: flex;
+    align-items: center;
+    box-shadow: none;
+    height: 40px;
+    white-space: nowrap;
+}
+.search-btn i {
+    font-size: 1.0em;
+    margin-right: 5px;
+    color: var(--dark-blue);
+}
+.search-btn:hover {
+    background-color: #d9d9d9;
+}
+.search-box {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    padding: 10px;
+    background: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 100;
+    margin-top: 5px;
+    border-radius: 4px;
+    min-width: 250px;
+}
+.search-box.active {
+    display: block;
+}
+.search-box input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-size: 1em;
+}
+.menu-toggle {
+    display: none;
+    font-size: 1.8em;
+    cursor: pointer;
+    color: white; /* Changed color to white for mobile navbar */
+    margin-left: 15px;
+}
+
+/* SIDEBAR/SIDENAV STYLES (Updated for Consistency) */
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    background-color: var(--dark-blue);
+    overflow-x: hidden;
+    transition: 0.4s;
+    padding-top: 0; 
+    box-shadow: 4px 0 10px rgba(0,0,0,0.5);
+}
+/* New style for the logo/name block inside the Sidenav */
+.sidenav-header {
+    display: none; /* Default: Hidden on Desktop */
+    flex-direction: column;
+    align-items: center;
+    padding: 15px 20px 20px 20px;
+    border-bottom: 2px solid var(--gold);
+    margin-bottom: 10px;
+}
+.sidenav-header .school-logo {
+    height: 50px;
+    margin-right: 0;
+    margin-bottom: 5px;
+}
+.sidenav-header .full-name {
+    font-size: 1.2em;
+    text-align: center;
+    line-height: 1.1;
+    font-weight: 700;
+}
+.sidenav-header .full-name .big-text,
+.sidenav-header .full-name .small-text {
+    font-size: 1.0em;
+    font-weight: 700;
+}
+
+.sidenav a {
+    padding: 15px 20px;
+    text-decoration: none;
+    font-size: 1.2em;
+    color: white;
+    display: block;
+    transition: 0.3s;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+/* Highlight/Hover style from Registrar's page applied */
+.sidenav a:hover,
+.sidenav a[data-active="careers"] { /* New attribute selector for active state */
+    color: var(--gold); 
+    background-color: #1a2a6b; 
+    padding-left: 25px; /* Added indentation on hover/active */
+}
+.sidenav .closebtn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 40px;
+    color: white;
+    background-color: var(--dark-blue);
+    border-bottom: none;
+    padding: 0 10px;
+}
+.sidenav .closebtn:hover {
+    color: var(--gold);
+    background-color: var(--dark-blue);
+}
+/* Mobile Overlay */
+.overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.4); 
+    z-index: 999;
+}
+.sidenav.active ~ .overlay {
+    display: block;
+}
+
+/* Secondary Bar (FIX: Increased font-size to 1.2em) */
+.secondary-bar {
+    background-color: var(--gold);
+    color: var(--dark-blue);
+    padding: 10px 20px;
+    font-weight: 700;
+    font-size: 1.2em;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* ---------------------------------------------------------------------- */
+/* === RESPONSIVE STYLES (CRITICAL UPDATE FROM REGISTRAR) === */
+/* ---------------------------------------------------------------------- */
+@media (max-width: 1000px) {
+    .navbar {
+        padding: 10px 15px;
+        height: 50px;
+        /* Align the entire navbar content to the right (Menu Toggle) */
+        justify-content: flex-end;
+    }
+    /* Hide the full name/logo on the mobile navbar */
+    .school-name-area {
+        display: none;
+    }
+    /* Container for Menu Toggle only */
+    .main-links-container {
+        width: 100%;
+        justify-content: flex-end; /* Push the menu toggle to the right */
+        order: 1;
+        margin: 0;
+        padding: 0;
+    }
+    .main-links { display: none; }
+    /* Hide the Search button on mobile */
+    .search-area { display: none; }
+    /* Show Menu Toggle (Top-Right) */
+    .menu-toggle {
+        display: block;
+        order: 1;
+        font-size: 1.8em;
+        color: white;
+        margin-left: 0;
+    }
+    /* Secondary Bar Adjustment for Mobile */
+    .secondary-bar {
+        padding: 6px 15px;
+        font-size: 1.0em;
+    }
+    /* Sidenav Header (to show logo/name) */
+    .sidenav-header {
+        display: flex; /* Make Sidenav Header visible */
+    }
+
+    /* Careers Content Adjustments */
+    .job-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .job-actions {
+        width: 100%;
+        padding-left: 0;
+        margin-top: 15px;
+        text-align: center;
+    }
+    .view-details-btn {
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .footer-main {
+        gap: 40px;
+        padding: 20px;
+        text-align: center;
+        flex-direction: column;
+    }
+    .footer-column {
+        flex-basis: auto;
+    }
+    .social-media-icons {
+        justify-content: center;
+    }
+    .modal-content {
+        margin-top: 10px;
+        padding: 20px;
+    }
+}
+/* === END NAVBAR & RESPONSIVE STYLES === */
+/* ---------------------------------------------------------------------- */
+
+/* === CAREERS CONTENT STYLES (From Original Careers Page) === */
+.page-container {
+max-width: 1000px;
+margin: 50px auto;
+padding: 0 20px;
+}
+.intro-header {
+text-align: center;
+margin-bottom: 50px;
+}
+.intro-header h1 {
+font-size: 44px;
+font-weight: 900;
+color: var(--dark-blue);
+margin: 0 0 10px 0;
+position: relative;
+}
+.intro-header h1::after {
+content: '';
+position: absolute;
+bottom: -10px;
+left: 50%;
+transform: translateX(-50%);
+width: 80px;
+height: 5px;
+background-color: var(--gold);
+border-radius: 3px;
+}
+.intro-header p {
+font-size: 1.1em;
+color: #666;
+margin: 20px 0 0 0;
+}
+/* TAB STYLES */
+.job-tabs {
+display: flex;
+border-bottom: 2px solid #ddd;
+margin-bottom: 30px;
+overflow-x: auto;
+}
+.tab-button {
+padding: 15px 25px;
+cursor: pointer;
+background-color: #e9e9e9;
+color: var(--text-color);
+font-weight: 600;
+border: none;
+border-right: 1px solid #ddd;
+transition: background-color 0.3s, color 0.3s;
+white-space: nowrap;
+border-top-left-radius: 8px;
+border-top-right-radius: 8px;
+margin-right: 5px;
+}
+.tab-button.active {
+background-color: var(--dark-blue);
+color: white;
+border-bottom: 3px solid var(--gold);
+margin-bottom: -2px;
+}
+/* JOB CARD STYLES */
+.job-card {
+background-color: white;
+border: 1px solid #ddd;
+border-left: 5px solid var(--gold);
+margin-bottom: 20px;
+padding: 25px;
+border-radius: 8px;
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+display: flex;
+justify-content: space-between;
+align-items: center;
+transition: transform 0.3s, border-left-color 0.3s;
+}
+.job-card:hover {
+transform: translateY(-3px);
+box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+border-left-color: var(--dark-blue);
+}
+.job-info {
+flex-grow: 1;
+}
+.job-title {
+font-size: 1.4em;
+font-weight: 700;
+color: var(--dark-blue);
+margin-bottom: 5px;
+}
+.job-meta {
+font-size: 0.9em;
+color: #666;
+}
+.job-meta-item {
+display: inline-block;
+margin-right: 15px;
+}
+.job-meta-item i {
+margin-right: 5px;
+color: var(--gold);
+}
+.job-actions {
+flex-shrink: 0;
+padding-left: 20px;
+}
+/* BUTTON STYLE: Changed from .apply-btn to .view-details-btn */
+.view-details-btn {
+background-color: var(--gold);
+color: var(--dark-blue);
+border: none;
+padding: 10px 20px;
+border-radius: 5px;
+cursor: pointer;
+font-weight: 700;
+text-decoration: none;
+transition: background-color 0.3s, transform 0.2s;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+/* Added to ensure it acts like a button */
+display: inline-block;
+text-align: center;
+white-space: nowrap;
+}
+.view-details-btn:hover {
+background-color: var(--gold-darker);
+transform: scale(1.02);
+}
+/* NO JOBS MESSAGE */
+.no-jobs {
+text-align: center;
+padding: 40px;
+background-color: white;
+border: 1px dashed #ccc;
+color: #777;
+border-radius: 8px;
+margin-top: 30px;
+font-size: 1.1em;
+}
+/* --- MODAL (LIGHTBOX) STYLES - Customized for Job Details --- */
+.modal {
+display: none;
+position: fixed;
+z-index: 2000;
+padding-top: 50px; /* Adjusted padding-top */
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+overflow: auto;
+background-color: rgba(0,0,0,0.8); /* Darker overlay */
+}
+.modal-content {
+background-color: white;
+margin: auto;
+padding: 30px;
+border: 1px solid #888;
+width: 90%;
+max-width: 700px; /* Max width for readability */
+border-radius: 8px;
+animation-name: animatetop;
+animation-duration: 0.4s;
+}
+@keyframes animatetop {
+from {top: -300px; opacity: 0}
+to {top: 0; opacity: 1}
+}
+.modal-content h2 {
+color: var(--dark-blue);
+font-size: 2em;
+border-bottom: 3px solid var(--gold);
+padding-bottom: 10px;
+margin-top: 0;
+}
+.modal-content h3 {
+color: #555;
+font-size: 1.3em;
+margin-top: 20px;
+margin-bottom: 5px;
+}
+.modal-content ul {
+padding-left: 20px;
+}
+.close-modal {
+color: #f1f1f1;
+font-size: 40px;
+font-weight: bold;
+transition: 0.3s;
+position: absolute;
+top: 10px;
+right: 30px;
+cursor: pointer;
+z-index: 2001;
+}
+.close-modal:hover,
+.close-modal:focus {
+color: var(--gold);
+text-decoration: none;
+}
+/* END MODAL STYLES */
+/* ---------------------------------------------------------------------- */
+/* === FOOTER STYLES (MATCHING REGISTRAR) - UPDATED FOR ICONS === */
+/* ---------------------------------------------------------------------- */
+footer {
+text-align: center;
+background-color: #808080; /* Gray */
+color: white;
+margin-top: 40px;
+font-family: 'Roboto', sans-serif; /* Use Roboto for footer text */
+}
+.footer-main {
+display: flex;
+justify-content: space-around; /* Changed to space-around for better spread */
+max-width: 1400px;
+margin: 0 auto;
+text-align: left;
+padding: 30px 20px;
+flex-wrap: wrap;
+gap: 40px;
+}
+.footer-column {
+margin-bottom: 20px;
+flex-basis: 200px;
+}
+.footer-column p {
+margin: 5px 0;
+}
+.footer-column a {
+color: white;
+text-decoration: none;
+transition: color 0.3s;
+}
+.footer-column a:hover {
+color: var(--gold);
+}
+/* Social Media Icons (Kapareho ng Registrar) */
+.social-media-icons {
+display: flex;
+gap: 15px;
+margin-top: 10px;
+}
+.social-media-icons a {
+color: white;
+text-decoration: none;
+font-size: 1.5em;
+transition: color 0.3s, transform 0.3s;
+}
+.social-media-icons a:hover {
+color: var(--gold);
+transform: translateY(-2px);
+}
+.footer-copyright {
+text-align: center;
+font-size: 0.8em;
+padding: 10px 0;
+border-top: 1px solid #6c757d;
+}
+/* --- FOOTER RESPONSIVE STYLES --- */
+@media (max-width: 1000px) {
+    .footer-main {
+        gap: 40px;
+        padding: 20px;
+        text-align: center;
+        flex-direction: column;
+    }
+    .footer-column {
+        flex-basis: auto;
+    }
+    .social-media-icons {
+        justify-content: center;
+    }
+}
+</style>
+</head>
+<body>
+<div class="top-bar"></div>
+
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+    <div class="sidenav-header">
+        <img src="image/ganda.png" alt="PSU Logo" class="school-logo">
+        <span class="full-name">
+            <span class="big-text">PHILLIPINE STATE</span>
+            <span class="small-text">UNIVERSITY</span>
+        </span>
+    </div>
+
+    <a href="index.html">Home</a>
+    <a href="#">News</a>
+    <a href="admission.html">Admissions</a>
+    <a href="#">Scholarships</a>
+    <a href="#">Alumni</a>
+    <a href="jobs.html" data-active="careers">Jobs</a>
+    <a href="#">Research</a>
+    <a href="registrar.html">Registrar</a>
+    <a href="#">Contact Us</a>
+    <a style="border-bottom: none; color: #999; font-size: 0.8em; margin-top: 10px; cursor: default; padding-left: 20px;">© 2024 PSU</a>
+</div>
+
+<div class="overlay" id="overlay" onclick="closeNav()"></div>
+
+<nav class="navbar">
+    <span class="school-name-area">
+        <img src="image/ganda.png" alt="PSU Logo" class="school-logo">
+        <span class="full-name">
+            <span class="big-text">PHILLIPINE STATE</span>
+            <span class="small-text">UNIVERSITY</span>
+        </span>
+    </span>
+
+    <div class="main-links-container">
+        <div class="main-links" id="mainMenu">
+            <a href="index.html">Home</a>
+            <a href="#">News</a>
+            <a href="admission.html">Admissions</a>
+            <a href="#">Scholarships</a>
+            <a href="#">Alumni</a>
+            <a href="jobs.html">Jobs</a>
+            <a href="#">Research</a>
+            <a href="registrar.html">Registrar</a>
+            <a href="#">Contact Us</a>
+        </div>
+
+        <div class="right-side-actions">
+            <div class="search-area">
+                <button class="search-btn" onclick="toggleSearchBar()">
+                    <i class="fas fa-search"></i> <span>Search</span>
+                </button>
+                <div class="search-box" id="searchBox">
+                    <input type="text" placeholder="Search PSU website...">
+                </div>
+            </div>
+            <div class="menu-toggle" id="menuToggle" onclick="openNav()">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="secondary-bar">
+    <span>PSU - Careers | Job Opportunities</span>
+</div>
+
+<div class="page-container">
+    <header class="intro-header">
+        <h1>JOIN OUR TEAM</h1>
+        <p>Explore opportunities to work at Phillipine State University. We are always looking for passionate and talented individuals.</p>
+    </header>
+
+    <div class="job-tabs">
+        <button class="tab-button active" onclick="openTab(event, 'Faculty')">Faculty Positions</button>
+        <button class="tab-button" onclick="openTab(event, 'Admin')">Administrative Staff</button>
+        <button class="tab-button" onclick="openTab(event, 'Staff')">Support Staff</button>
+    </div>
+
+    <div id="Faculty" class="tab-content active">
+        <div class="job-card">
+            <div class="job-info">
+                <div class="job-title">Professor, Computer Science</div>
+                <div class="job-meta">
+                    <span class="job-meta-item"><i class="fas fa-map-marker-alt"></i> Main Campus</span>
+                    <span class="job-meta-item"><i class="far fa-calendar-alt"></i> Posted: Sept 15, 2025</span>
+                </div>
+            </div>
+            <div class="job-actions">
+                <button class="view-details-btn"
+                    onclick="openJobModal('Professor, Computer Science', 'faculty-cs')">
+                    View Details
+                </button>
+            </div>
+        </div>
+        <div class="job-card">
+            <div class="job-info">
+                <div class="job-title">Instructor, Electrical Engineering</div>
+                <div class="job-meta">
+                    <span class="job-meta-item"><i class="fas fa-map-marker-alt"></i> Satellite Branch</span>
+                    <span class="job-meta-item"><i class="far fa-calendar-alt"></i> Posted: Aug 20, 2025</span>
+                </div>
+            </div>
+            <div class="job-actions">
+                <button class="view-details-btn"
+                    onclick="openJobModal('Instructor, Electrical Engineering', 'faculty-ee')">
+                    View Details
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="Admin" class="tab-content">
+        <div class="job-card">
+            <div class="job-info">
+                <div class="job-title">Director of Student Affairs</div>
+                <div class="job-meta">
+                    <span class="job-meta-item"><i class="fas fa-map-marker-alt"></i> Main Campus</span>
+                    <span class="job-meta-item"><i class="far fa-calendar-alt"></i> Posted: Sept 1, 2025</span>
+                </div>
+            </div>
+            <div class="job-actions">
+                <button class="view-details-btn"
+                    onclick="openJobModal('Director of Student Affairs', 'admin-director')">
+                    View Details
+                </button>
+            </div>
+        </div>
+        <div class="job-card">
+            <div class="job-info">
+                <div class="job-title">Admissions Officer</div>
+                <div class="job-meta">
+                    <span class="job-meta-item"><i class="fas fa-map-marker-alt"></i> Main Campus</span>
+                    <span class="job-meta-item"><i class="far fa-calendar-alt"></i> Posted: July 10, 2025</span>
+                </div>
+            </div>
+            <div class="job-actions">
+                <button class="view-details-btn"
+                    onclick="openJobModal('Admissions Officer', 'admin-officer')">
+                    View Details
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="Staff" class="tab-content">
+        <div class="no-jobs">
+            <i class="fas fa-info-circle"></i> No Support Staff positions are currently available. Please check back later!
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-main">
+        <div class="footer-column">
+            <p style="font-weight: bold; margin: 0; font-size: 1.1em;">PHILLIPINE STATE UNIVERSITY</p>
+            <p style="font-size: 0.9em;">Palm Ave, Dasmarinas Makati, Metro Manila</p>
+            <p style="margin-top: 20px; font-style: italic; font-size: 0.9em;">"Animus et cor unum in Deum"</p>
+        </div>
+        <div class="footer-column">
+            <p style="font-weight: bold; margin-top: 0;">For Inquiries:</p>
+            <p>899-10-100</p>
+            <p style="font-weight: bold; margin-top: 15px;">Admissions:</p>
+            <p>899-10-123</p>
+            <p>899-10-124</p>
+        </div>
+        <div class="footer-column">
+            <p style="font-weight: bold; margin-top: 0;">Registrar:</p>
+            <p>899-10-100</p>
+            <p>899-10-110</p>
+            <p style="font-weight: bold; margin-top: 15px;">WEBSITE</p>
+            <p><a href="#">Privacy Policy</a></p>
+            <p><a href="#">Site Map</a></p>
+        </div>
+        <div class="footer-column">
+            <p style="font-weight: bold; margin-top: 0;">SOCIAL MEDIA</p>
+            <div class="social-media-icons">
+                <a href="#" aria-label="Link to Facebook" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Link to Twitter/X" title="Twitter/X"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Link to Instagram" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Link to Youtube" title="Youtube"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        &copy; 2025 PHILLIPINE STATE UNIVERSITY – ICT & Media Department
+    </div>
+</footer>
+
+<div id="jobDetailsModal" class="modal" onclick="closeJobModal(event)">
+    <span class="close-modal" onclick="closeJobModal(event)">&times;</span>
+    <div class="modal-content" id="modalContent">
+    </div>
+</div>
+
+<script>
+    // JAVASCRIPT FOR SIDE NAVIGATION BAR (SIDENAV) - UPDATED
+    function openNav() {
+        const sidenav = document.getElementById("mySidenav");
+        const overlay = document.getElementById("overlay");
+        const searchBox = document.getElementById('searchBox');
+
+        // Close search bar if it's active
+        if (searchBox && searchBox.classList.contains('active')) {
+            searchBox.classList.remove('active');
+        }
+
+        // Use 85% width on very small screens, 70% otherwise
+        sidenav.style.width = window.innerWidth <= 600 ? "85%" : "70%";
+        sidenav.classList.add('active');
+        overlay.style.display = "block";
+    }
+
+    function closeNav() {
+        const sidenav = document.getElementById("mySidenav");
+        const overlay = document.getElementById("overlay");
+        sidenav.style.width = "0";
+        sidenav.classList.remove('active');
+        overlay.style.display = "none";
+    }
+
+    // JAVASCRIPT FOR SEARCH BAR TOGGLE - UPDATED
+    function toggleSearchBar() {
+        const searchBox = document.getElementById('searchBox');
+
+        searchBox.classList.toggle('active');
+
+        if (searchBox.classList.contains('active')) {
+            searchBox.querySelector('input').focus();
+            closeNav(); // Close side nav if search bar opens
+        }
+    }
+    
+    // Close sidebar if overlay is clicked
+    document.getElementById('overlay').addEventListener('click', closeNav);
+
+    // JAVASCRIPT FOR CAREERS PAGE TAB FUNCTIONALITY
+    function openTab(evt, tabName) {
+        let i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tab-content");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tab-button");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+    // Set default active tab on load
+    document.addEventListener('DOMContentLoaded', () => {
+        const firstTabButton = document.querySelector('.tab-button');
+        if (firstTabButton) {
+            firstTabButton.click();
+        }
+    });
+
+    // === JAVASCRIPT FOR JOB DETAILS MODAL ===
+    const jobData = {
+        'faculty-cs': {
+            description: "The Professor will teach advanced computer science courses, mentor students, and actively engage in research to contribute to the university's academic excellence.",
+            requirements: [
+                "PhD in Computer Science or a closely related field.",
+                "Minimum of 3 years of teaching experience at the university level.",
+                "Proven research track record (publications, grants).",
+                "Excellent communication and leadership skills."
+            ],
+            procedure: [
+                "Submit letter of intent and CV to the HR Department.",
+                "Include copies of academic credentials and a research proposal.",
+                "Attend a presentation and interview session (scheduled via email)."
+            ]
+        },
+        'faculty-ee': {
+            description: "The Instructor will teach foundational and specialized courses in Electrical Engineering and supervise student laboratory sessions and projects.",
+            requirements: [
+                "Master's Degree in Electrical Engineering (BS with exceptional experience may be considered).",
+                "Licensed Engineer (preferred).",
+                "Strong grasp of fundamental electrical principles and lab practices."
+            ],
+            procedure: [
+                "Submit application letter and CV to the Satellite Branch Dean.",
+                "Provide contact details for three professional references.",
+                "A practical exam may be administered during the interview."
+            ]
+        },
+        'admin-director': {
+            description: "Responsible for overseeing all aspects of student life, including student organizations, guidance counseling, disciplinary actions, and campus activities.",
+            requirements: [
+                "Master's Degree in Educational Management, Public Administration, or related field.",
+                "Minimum of 5 years of progressive experience in student affairs management.",
+                "Strong leadership, mediation, and organizational skills."
+            ],
+            procedure: [
+                "Submit comprehensive CV and cover letter outlining management philosophy.",
+                "Complete the PSU Management Application Form (available online).",
+                "Panel interview and psychological assessment."
+            ]
+        },
+        'admin-officer': {
+            description: "Manages student admission process, from application review and testing to enrollment and record keeping for new students.",
+            requirements: [
+                "Bachelor's Degree in Business Administration, Office Management, or related field.",
+                "Minimum 2 years of experience in admissions or registrar's office.",
+                "Proficiency in Microsoft Office and student information systems."
+            ],
+            procedure: [
+                "Apply online via the PSU Careers Portal.",
+                "Submit NBI Clearance and two letters of recommendation.",
+                "Written examination and final interview."
+            ]
+        }
+    };
+
+    function generateList(items) {
+        let html = '<ul>';
+        items.forEach(item => {
+            html += `<li>${item}</li>`;
+        });
+        html += '</ul>';
+        return html;
+    }
+
+    function openJobModal(jobTitle, jobId) {
+        const modal = document.getElementById('jobDetailsModal');
+        const modalContent = document.getElementById('modalContent');
+        const data = jobData[jobId];
+
+        if (!data) {
+            modalContent.innerHTML = '<h2>Error</h2><p>Job details not found.</p>';
+        } else {
+            modalContent.innerHTML = `
+                <h2>${jobTitle}</h2>
+
+                <h3>Job Description</h3>
+                <p>${data.description}</p>
+
+                <h3>Minimum Requirements</h3>
+                ${generateList(data.requirements)}
+
+                <h3>Application Procedure</h3>
+                ${generateList(data.procedure)}
+
+                <p style="margin-top: 30px; text-align: center;">
+                    <a href="#" class="view-details-btn" style="background-color: var(--dark-blue); color: white; padding: 12px 25px;">
+                        <i class="fas fa-file-alt"></i> Proceed to Application
+                    </a>
+                </p>
+            `;
+        }
+        modal.style.display = "block";
+    }
+
+    function closeJobModal(event) {
+        const modal = document.getElementById('jobDetailsModal');
+        // Close only if the modal background or the close button is clicked
+        if (event.target === modal || event.target.classList.contains('close-modal')) {
+            modal.style.display = "none";
+        }
+    }
+
+    document.addEventListener('keydown', function(event) {
+        const modal = document.getElementById('jobDetailsModal');
+        if (event.key === "Escape" && modal.style.display === "block") {
+            modal.style.display = "none";
+        }
+    });
+
+</script>
+</body>
+</html>

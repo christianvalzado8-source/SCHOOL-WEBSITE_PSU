@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PSU - Admissions Office | Application Guidelines</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;800&family=Roboto:wght@400;500;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+/* === VARIABLES (FOR CONSISTENCY) === */
+:root {
+    --dark-blue: #2e4395;
+    --gold: #FFC300;
+    --text-color: #333;
+    --red-link: #D32F2F; 
+}
+
+/* === GENERAL STYLES === */
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif; 
+    background-color: white;
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* === TOP DARK BLUE BAR === */
+.top-bar {
+    background-color: #243572; 
+    height: 5px; 
+    width: 100%;
+}
+
+/* ---------------------------------------------------------------------- */
+/* === NAVBAR STYLES === */
+/* ---------------------------------------------------------------------- */
+.navbar {
+    background-color: var(--dark-blue); 
+    padding: 15px 15px; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    color: white;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+/* School Name/Logo - Desktop/Default View */
+.school-name-area {
+    display: flex; 
+    align-items: center; 
+    flex-shrink: 0;
+    margin-right: 30px; 
+    position: static; 
+    left: auto;
+    transform: none;
+}
+.school-logo {
+    height: 65px; 
+    width: auto;
+    margin-right: 15px; 
+}
+.full-name {
+    display: inline-block !important;
+    line-height: 1.0; 
+    font-family: 'Roboto', sans-serif; 
+    font-weight: 800; 
+    font-size: 1.6em; 
+    color: white; 
+    text-transform: uppercase;
+    padding-top: 5px; 
+}
+.full-name .big-text {
+    display: block; 
+    line-height: 1.0;
+}
+.full-name .small-text {
+    display: block; 
+    font-size: 0.9em; 
+    font-weight: 800; 
+    opacity: 1; 
+    margin-left: 0; 
+    margin-top: 0; 
+    line-height: 1.0;
+}
+
+/* Desktop Links */
+.main-links-container {
+    display: flex;
+    align-items: center; 
+    flex-grow: 1; 
+    justify-content: flex-end; 
+    order: 2; 
+}
+.main-links {
+    display: flex;
+    align-items: center; 
+    padding-top: 0; 
+    overflow-x: hidden;
+    flex-grow: 0; 
+    justify-content: flex-end; 
+    margin-right: 20px; 
+}
+.main-links a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px; 
+    padding: 8px 0;
+    white-space: nowrap;
+    transition: color 0.3s;
+    font-size: 1.0em; 
+    font-weight: 500;
+}
+/* Highlight Admissions link in gold/yellow */
+.main-links a:hover,
+.main-links a[href*="admission.html"] { 
+    color: var(--gold); 
+}
+.right-side-actions {
+    display: flex;
+    align-items: center; 
+    flex-shrink: 0;
+}
+
+/* --- SEARCH BAR STYLES (Show/Hide Toggle) --- */
+.search-area {
+    position: relative; 
+    margin-right: 10px; 
+}
+.search-btn {
+    background-color: #e6e6e6; 
+    color: #333; 
+    border: none;
+    padding: 8px 15px; 
+    cursor: pointer;
+    border-radius: 4px; 
+    font-weight: 500;
+    font-size: 0.95em; 
+    display: flex;
+    align-items: center;
+    box-shadow: none;
+    height: 40px; 
+}
+.search-btn:hover {
+    background-color: #d9d9d9;
+}
+.search-btn i {
+    font-size: 1.0em;
+    margin-right: 5px; 
+    color: var(--dark-blue); 
+}
+.search-btn span {
+    display: inline; 
+}
+.search-box {
+    display: none; 
+    position: absolute;
+    top: 100%;
+    right: 0;
+    padding: 10px;
+    background: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 100;
+    margin-top: 5px;
+    border-radius: 4px;
+    min-width: 250px;
+}
+.search-box input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+.search-box.active {
+    display: block; 
+}
+.menu-toggle {
+    display: none; 
+}
+
+/* SIDE NAV STYLES */
+.sidenav {
+    height: 100%;
+    width: 0; 
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    background-color: var(--dark-blue); 
+    overflow-x: hidden;
+    transition: 0.4s; 
+    padding-top: 15px; 
+    box-shadow: 4px 0 10px rgba(0,0,0,0.5);
+}
+/* New style for the logo/name block inside the Sidenav (only visible in mobile) */
+.sidenav-header {
+    display: none; /* Default: Hidden on Desktop */
+    flex-direction: column;
+    align-items: center;
+    padding: 15px 20px 20px 20px;
+    border-bottom: 2px solid var(--gold);
+    margin-bottom: 10px;
+}
+.sidenav-header .school-logo {
+    height: 50px;
+    margin-right: 0;
+    margin-bottom: 5px;
+}
+.sidenav-header .full-name {
+    font-size: 1.2em;
+    text-align: center;
+    line-height: 1.1;
+    font-weight: 700;
+}
+.sidenav-header .full-name .big-text,
+.sidenav-header .full-name .small-text {
+    font-size: 1.0em;
+    font-weight: 700;
+}
+
+.sidenav a {
+    padding: 15px 20px; 
+    text-decoration: none;
+    font-size: 1.2em; 
+    color: white;
+    display: block;
+    transition: 0.3s;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500; 
+    letter-spacing: 0.5px;
+}
+.sidenav a:hover,
+.sidenav a[href*="admission.html"] { 
+    color: var(--gold); 
+    background-color: #1a2a6b; 
+    padding-left: 25px; 
+}
+.sidenav .closebtn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 40px;
+    color: white; 
+    background-color: var(--dark-blue); 
+    border-bottom: none;
+    padding: 0 10px;
+}
+.sidenav .closebtn:hover {
+    color: var(--gold);
+    background-color: var(--dark-blue);
+}
+.overlay {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.4);
+    z-index: 999;
+}
+
+
+/* === SECONDARY BAR (Yellow) - Admissions Title Bar === */
+.secondary-bar {
+    background-color: var(--gold); 
+    color: var(--dark-blue); 
+    padding: 8px 15px; 
+    font-weight: 800;
+    font-size: 1.2em; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+}
+
+/* === RESPONSIVE STYLES (Mobile/Small Screens) === */
+@media (max-width: 1000px) { 
+    .navbar {
+        padding: 10px 15px;
+        height: 50px; 
+        /* I-align ang buong laman ng navbar sa kanan */
+        justify-content: flex-end; 
+    }
+    
+    /* 1. Itago ang School Name/Logo */
+    .school-name-area {
+        display: none; 
+    }
+    
+    /* 2. Container para sa Menu Toggle lang */
+    .main-links-container {
+        width: 100%;
+        /* Dito ang susi: I-align ang Menu Toggle sa pinaka-kanan */
+        justify-content: flex-end; 
+        order: 1; 
+        margin: 0;
+        padding: 0;
+    }
+
+    .main-links {
+        display: none; 
+    }
+    
+    /* 3. ALISIN ANG SEARCH AREA PARA HINDI MAKITA */
+    .search-area {
+        display: none; /* Ito ang pagbabago */
+    }
+    
+    /* 4. Menu Toggle (Pinaka-kanan: Top-Right) */
+    .menu-toggle {
+        display: block; 
+        order: 1; /* Magiging order 1 na lang ito dahil wala nang search */
+        font-size: 1.8em;
+        color: white; 
+        margin-left: 0; /* Wala nang katabi, kaya alisin ang margin */
+    }
+    
+    /* Secondary Bar Adjustment for Mobile */
+    .secondary-bar {
+        padding: 6px 15px; 
+        font-size: 1.0em; 
+    }
+    
+    /* Sidenav Header (to show logo/name) */
+    .sidenav-header {
+        display: flex; /* Gawing visible */
+    }
+    
+    /* Content Adjustments (General) */
+    .page-container {
+        flex-direction: column;
+        padding: 10px;
+    }
+    .right-sidebar h2, .quick-link-item {
+        text-align: center;
+    }
+    .contact-info-block {
+        text-align: center; 
+    }
+    .admission-step {
+        flex-direction: column;
+        align-items: center;
+    }
+    .step-icon, .step-details {
+        margin: 10px 0;
+        text-align: center;
+    }
+    .step-icon {
+        padding: 15px;
+    }
+}
+/* ---------------------------------------------------------------------- */
+/* === END NAVBAR STYLES === */
+/* ---------------------------------------------------------------------- */
+
+/* === Admissions Page Specific Styles === */
+
+.admissions-header {
+    text-align: center;
+    padding: 30px 20px 0 20px;
+    max-width: 1400px; 
+    margin: 0 auto;
+}
+.admissions-header h1 {
+    color: var(--text-color); 
+    font-size: 32px;
+    font-weight: bold;
+    margin: 0;
+}
+.page-container {
+    display: flex;
+    max-width: 1400px; 
+    margin: 0 auto;
+    gap: 40px;
+    padding: 20px;
+}
+.main-content {
+    flex-grow: 1;
+    flex-basis: 75%; 
+}
+.right-sidebar {
+    flex-basis: 25%; 
+    padding-top: 20px;
+    min-width: 250px; 
+}
+.section-header {
+    color: var(--dark-blue);
+    font-size: 24px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-weight: 700;
+    border-bottom: 2px solid var(--gold);
+    padding-bottom: 5px;
+}
+
+/* Admission Process Steps */
+.admission-step {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 30px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-left: 5px solid var(--dark-blue);
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.step-icon {
+    font-size: 2em;
+    color: var(--gold);
+    background-color: var(--dark-blue);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px;
+    flex-shrink: 0;
+    font-weight: bold;
+    color: white;
+}
+.step-details {
+    flex-grow: 1;
+}
+.step-details h3 {
+    margin: 0 0 5px 0;
+    font-size: 1.2em;
+    color: var(--dark-blue);
+    font-weight: 700;
+}
+.step-details p {
+    margin: 0;
+    font-size: 0.95em;
+}
+.step-details ul {
+    margin-top: 5px;
+    padding-left: 20px;
+}
+.step-details li {
+    margin-bottom: 5px;
+}
+
+/* Sidebar Specifics */
+.right-sidebar h2 {
+    color: var(--dark-blue); 
+    font-size: 16px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    text-align: right;
+}
+.contact-info-block {
+    text-align: right;
+    margin-top: 40px;
+    border-top: 2px solid var(--dark-blue); 
+    padding-top: 15px;
+}
+.contact-info-block p {
+    margin: 0;
+}
+.contact-info-block .bold-title {
+    font-weight: bold;
+    color: var(--dark-blue);
+    margin-bottom: 5px;
+}
+.contact-info-block .red-link {
+    color: var(--dark-blue); 
+    text-decoration: none;
+}
+.alert-box {
+    padding: 15px;
+    background-color: #ffe0b2; /* Light Orange/Warning */
+    color: var(--text-color);
+    border-left: 5px solid #ff9800; /* Darker Orange */
+    margin: 20px 0;
+    border-radius: 5px;
+    font-weight: 500;
+}
+
+/* Documents/Download Links */
+.doc-link {
+    display: block;
+    padding: 15px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: var(--text-color);
+    transition: background-color 0.3s, border-color 0.3s;
+    display: flex;
+    align-items: center;
+}
+.doc-link:hover {
+    background-color: #e3f2fd; /* Light Blue */
+    border-color: var(--dark-blue);
+}
+.doc-link i {
+    font-size: 1.5em;
+    color: var(--dark-blue);
+    margin-right: 10px;
+}
+.doc-title {
+    font-weight: bold;
+    line-height: 1.2;
+}
+.doc-subtitle {
+    font-size: 0.8em;
+    color: #555;
+}
+
+/* === FOOTER STYLES (RESTORED SIMPLE STYLE WITH ICONS) === */
+footer {
+    text-align: center;
+    background-color: #808080; /* Gray background */
+    color: white;
+    margin-top: 40px;
+}
+.footer-main {
+    display: flex;
+    justify-content: space-around; 
+    max-width: 1400px; 
+    margin: 0 auto;
+    text-align: left;
+    padding: 30px 20px;
+    flex-wrap: wrap;
+}
+.footer-column {
+    margin-bottom: 20px;
+}
+.footer-column p {
+    margin: 5px 0;
+}
+.footer-column a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s; /* Transition for hover */
+}
+.footer-column a:hover {
+    color: var(--gold); /* Highlight on hover */
+}
+
+/* Social Media Icons (Pinaganda at Inayos) */
+.social-media-icons {
+    display: flex; 
+    gap: 15px; 
+    margin-top: 10px;
+}
+.social-media-icons a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.5em; /* Laki ng icon */
+    transition: color 0.3s, transform 0.3s;
+}
+.social-media-icons a:hover {
+    color: var(--gold); /* Gold hover effect */
+    transform: translateY(-2px); /* Slight lift */
+}
+
+/* Dito sa mobile, i-center ang text at icons */
+@media (max-width: 1000px) { 
+    .footer-main {
+        gap: 40px;
+        padding: 20px;
+        text-align: center;
+        flex-direction: column;
+        max-width: 100%;
+    }
+    .footer-column {
+        text-align: center; 
+    }
+    .social-media-icons {
+        justify-content: center; /* I-center ang icons sa mobile */
+    }
+}
+
+
+.footer-copyright {
+    text-align: center;
+    font-size: 0.8em;
+    padding: 10px 0;
+    border-top: 1px solid #6c757d;
+}
+    </style>
+</head>
+
+<body>
+<div class="top-bar"></div>
+
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    
+    <div class="sidenav-header">
+        <img src="image/ganda.png" alt="PSU Logo" class="school-logo">
+        <span class="full-name">
+            <span class="big-text">PHILLIPINE STATE</span> 
+            <span class="small-text">UNIVERSITY</span> 
+        </span>
+    </div>
+    
+    <a href="index.html">Home</a>
+    <a href="#">News</a>
+    <a href="admission.html" style="color: var(--gold); background-color: #1a2a6b;">Admissions</a>
+    <a href="#">Scholarships</a>
+    <a href="#">Alumni</a>
+    <a href="jobs.html">Jobs</a>
+    <a href="#">Research</a>
+    <a href="registrar.html">Registrar</a> 
+    <a href="#">Contact Us</a>
+    <a style="border-bottom: none; color: #999; font-size: 0.8em; margin-top: 10px; cursor: default; padding-left: 20px;">© 2024 PSU</a>
+</div>  
+
+<div class="overlay" id="overlay" onclick="closeNav()"></div>
+
+<nav class="navbar">
+    
+    <span class="school-name-area">
+        <img src="image/ganda.png" alt="PSU Logo" class="school-logo">
+        
+        <span class="full-name">
+            <span class="big-text">PHILLIPINE STATE</span> 
+            <span class="small-text">UNIVERSITY</span> 
+        </span>
+    </span>
+
+    <div class="main-links-container">
+        <div class="main-links" id="mainMenu">
+            <a href="index.html">Home</a>
+            <a href="#">News</a>
+            <a href="admission.html" style="color: var(--gold);">Admissions</a>
+            <a href="#">Scholarships</a>
+            <a href="#">Alumni</a>
+            <a href="jobs.html">Jobs</a>
+            <a href="#">Research</a>
+            <a href="registrar.html">Registrar</a>
+            <a href="#">Contact Us</a>
+        </div>
+
+        <div class="right-side-actions">
+            <div class="search-area">
+                <button class="search-btn" onclick="toggleSearchBar()"> 
+                    <i class="fas fa-search"></i> <span>Search</span>
+                </button>
+                <div class="search-box" id="searchBox"> 
+                    <input type="text" placeholder="Search PSU website...">
+                </div>
+            </div>
+        </div>
+        
+        <div class="menu-toggle" id="menuToggle" onclick="openNav()">
+            <i class="fas fa-bars"></i>
+        </div>
+    </div>
+</nav>
+
+<div class="secondary-bar">
+    <span>ADMISSIONS OFFICE | APPLICATION GUIDELINES</span>
+</div>
+
+<div class="admissions-header">
+    <h1>APPLY TO PSU</h1>
+    <p>Your journey to becoming a part of the Phillipine State University community starts here. Follow the steps below for a smooth application process.</p>
+</div>
+
+<div class="page-container">
+
+    <div class="main-content">
+
+        <h2 class="section-header">Undergraduate Application Process</h2>
+        
+        <div class="alert-box">
+            <i class="fas fa-exclamation-triangle"></i> **Important:** The application period for AY 2025-2026 is from **October 15, 2024 to January 30, 2025**. Late applications will not be processed.
+        </div>
+
+        <div class="admission-step">
+            <div class="step-icon">1</div>
+            <div class="step-details">
+                <h3>Submit Online Application Form</h3>
+                <p>Fill out the official PSU Online Application Form. Ensure all information is accurate and matches your supporting documents.</p>
+                <ul>
+                    <li>Prepare a **digital copy** of your latest ID photo (2x2 with white background).</li>
+                    <li>Choose your preferred degree programs (up to 3 choices).</li>
+                    <li>Pay the **P500** non-refundable application fee online or at the Cashier's Office.</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="admission-step">
+            <div class="step-icon">2</div>
+            <div class="step-details">
+                <h3>Take the PSU Entrance Exam (PSUET)</h3>
+                <p>Upon successful submission, you will receive an Examination Permit via email. Follow the instructions for your scheduled exam date and location.</p>
+                <ul>
+                    <li>Bring your **printed Examination Permit** and **valid ID** (e.g., School ID, National ID).</li>
+                    <li>The exam covers English, Math, Science, and Abstract Reasoning.</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="admission-step">
+            <div class="step-icon">3</div>
+            <div class="step-details">
+                <h3>Check Results and Interview</h3>
+                <p>The list of successful examinees will be posted on the PSU Admissions Portal.</p>
+                <ul>
+                    <li>**Shortlisted applicants** must attend a mandatory interview with the College Dean/Department Head.</li>
+                    <li>Failure to attend the interview will forfeit your slot.</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="admission-step">
+            <div class="step-icon">4</div>
+            <div class="step-details">
+                <h3>Enrollment and Document Submission</h3>
+                <p>Once accepted, you must submit all hard-copy documents to the Admissions Office to confirm your slot for the upcoming semester.</p>
+                <ul>
+                    <li>Original Report Card (F138)</li>
+                    <li>Certificate of Good Moral Character</li>
+                    <li>PSA Birth Certificate (Photocopy)</li>
+                    <li>Medical Clearance from PSU Clinic</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2 class="section-header">Graduate School Admissions</h2>
+        <p>The Graduate School has separate requirements. Please download the specific checklist for your program.</p>
+        <a href="#" class="doc-link">
+            <i class="fas fa-file-pdf"></i>
+            <div>
+                <span class="doc-title">Graduate School Checklist (AY 2025-2026)</span>
+                <span class="doc-subtitle">Download PDF for MBA, MA, and PhD programs.</span>
+            </div>
+        </a>
+
+    </div>
+    
+    <div class="right-sidebar">
+
+        <h2 style="text-align: right; margin-top: 0;">ADMISSIONS RESOURCES:</h2>
+
+        <a href="#" class="doc-link">
+            <i class="fas fa-download"></i>
+            <div>
+                <span class="doc-title">PSUET Samplex & Reviewer</span>
+                <span class="doc-subtitle">Practice tests for the entrance exam.</span>
+            </div>
+        </a>
+        
+        <a href="#" class="doc-link">
+            <i class="fas fa-calendar-alt"></i>
+            <div>
+                <span class="doc-title">Academic Calendar (2025-2026)</span>
+                <span class="doc-subtitle">Key dates for enrolment and holidays.</span>
+            </div>
+        </a>
+        
+        <a href="#" class="doc-link">
+            <i class="fas fa-clipboard-list"></i>
+            <div>
+                <span class="doc-title">List of Available Courses</span>
+                <span class="doc-subtitle">View all undergraduate programs.</span>
+            </div>
+        </a>
+
+        <div class="contact-info-block">
+            <p class="bold-title">Admissions Office:</p>
+            <p>Mondays-Fridays 8:00 AM</p>
+            <p style="margin-bottom: 10px;">— 5:00 PM</p>
+
+            <p>email: <a href="mailto:admissions@psu.edu.ph" class="red-link">admissions@psu.edu.ph</a></p>
+            <p>Tel number: 899-10-123,</p>
+            <p>899-10-124</p>
+        </div>
+
+    </div>
+</div>
+
+<footer>
+    <div class="footer-main">
+        <div class="footer-column">
+            <p style="font-weight: bold; margin: 0; font-size: 1.1em;">PHILLIPINE STATE UNIVERSITY</p>
+            <p style="font-size: 0.9em;">Palm Ave, Dasmarinas Makati, Metro Manila</p>
+            <p style="margin-top: 20px; font-style: italic; font-size: 0.9em;">"Animus et cor unum in Deum"</p>
+        </div>
+
+        <div class="footer-column">
+            <p style="font-weight: bold; margin-top: 0;">For Inquiries:</p>
+            <p>899-10-100</p>
+
+            <p style="font-weight: bold; margin-top: 15px;">Admissions:</p>
+            <p>899-10-123</p>
+            <p>899-10-124</p>
+        </div>
+
+        <div class="footer-column">
+            <p style="font-weight: bold; margin-top: 0;">Registrar:</p>
+            <p>899-10-100</p>
+            <p>899-10-110</p>
+
+            <p style="font-weight: bold; margin-top: 15px;">WEBSITE</p>
+            <p><a href="#">Privacy Policy</a></p>
+            <p><a href="#">Site Map</a></p>
+        </div>
+
+        <div class="footer-column">
+            <p style="font-weight: bold; margin-top: 0;">SOCIAL MEDIA</p>
+            
+            <div class="social-media-icons">
+                <a href="#" aria-label="Link to Facebook" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Link to Twitter/X" title="Twitter/X"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Link to Instagram" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Link to Youtube" title="Youtube"><i class="fab fa-youtube"></i></a>
+            </div>
+            </div>
+    </div>
+    <div class="footer-copyright">
+        &copy; 2025 PHILLIPINE STATE UNIVERSITY – ICT & Media Department
+    </div>
+</footer>
+
+<script>
+    // JAVASCRIPT FOR SIDE NAVIGATION BAR (SIDENAV)
+    function openNav() {
+        const sidenav = document.getElementById("mySidenav");
+        const overlay = document.getElementById("overlay");
+        const searchBox = document.getElementById('searchBox'); 
+        
+        if (searchBox && searchBox.classList.contains('active')) {
+             searchBox.classList.remove('active');
+        }
+
+        sidenav.style.width = window.innerWidth <= 600 ? "85%" : "70%"; 
+        sidenav.classList.add('active'); 
+        overlay.style.display = "block"; 
+    }
+
+    function closeNav() {
+        const sidenav = document.getElementById("mySidenav");
+        const overlay = document.getElementById("overlay");
+        
+        sidenav.style.width = "0";
+        sidenav.classList.remove('active'); 
+        overlay.style.display = "none";
+    }
+
+    // JAVASCRIPT FOR SEARCH BAR TOGGLE 
+    function toggleSearchBar() {
+        const searchBox = document.getElementById('searchBox');
+        
+        searchBox.classList.toggle('active');
+        
+        if (searchBox.classList.contains('active')) {
+            searchBox.querySelector('input').focus();
+            closeNav(); 
+        }
+    }
+
+    // Close search box if click outside 
+    document.addEventListener('click', function(event) {
+        const searchBox = document.getElementById('searchBox');
+        const searchBtn = document.querySelector('.search-btn');
+        const menuToggle = document.getElementById('menuToggle');
+
+        if (searchBox && searchBtn && menuToggle && !searchBox.contains(event.target) && !searchBtn.contains(event.target) && !menuToggle.contains(event.target) && searchBox.classList.contains('active')) {
+            searchBox.classList.remove('active');
+        }
+    });
+</script>
+
+</body>
+</html>
